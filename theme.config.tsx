@@ -15,7 +15,7 @@ const Logo = () => (
   >
     <div
       style={{
-        padding: '6px 10px',
+        padding: '6px',
         background: 'linear-gradient(to bottom, #0D0D0D, #172751)',
         boxShadow: '0 0 0 1px rgba(13,13,13,1)',
         display: 'inline-flex',
@@ -68,8 +68,8 @@ const config: DocsThemeConfig = {
         href="https://usefirmware.com/app"
         style={{
           fontFamily: "'Glacial Indifference', 'Manrope', sans-serif",
-          fontWeight: 600,
-          fontSize: '13px',
+          fontWeight: 500,
+          fontSize: '14px',
           padding: '6px 12px',
           borderRadius: '2px',
           background: '#7cb4e6',
