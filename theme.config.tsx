@@ -1,6 +1,5 @@
 import React from 'react'
 import type { DocsThemeConfig } from 'nextra-theme-docs'
-import { Download } from 'lucide-react'
 
 // Mirrors usefirmware-website/components/header.tsx — periwinkle 1px gradient
 // frame around a navy row-gradient fill, "0x" in DotGothic16 over Lumen text.
@@ -19,17 +18,19 @@ const Logo = () => (
         background: 'linear-gradient(to bottom, #0D0D0D, #172751)',
         boxShadow: '0 0 0 1px rgba(13,13,13,1)',
         display: 'inline-flex',
-        alignItems: 'center',
+        alignItems: 'flex-end',
         justifyContent: 'center',
+        minHeight: '48px',
       }}
     >
       <span
         style={{
-          fontFamily: "'DotGothic16', ui-monospace, monospace",
-          fontWeight: 700,
+          fontFamily: "'DotGothic16', 'MS Gothic', 'Hiragino Sans GB', monospace",
+          fontWeight: 400,
           fontSize: '24px',
           lineHeight: 1,
           color: '#fafbf6',
+          letterSpacing: '-0.02em',
         }}
       >
         0x
@@ -38,9 +39,17 @@ const Logo = () => (
   </div>
 )
 
-// Match the lucide-react icon set used throughout usefirmware-website.
-// Default lucide size/stroke — same as chat-interface.tsx / page.tsx.
-const DownloadIcon = () => <Download size={24} />
+// Custom SVG download icon matching usefirmware-website icon style
+// (32x32 viewBox, white stroke, 2px stroke width)
+const DownloadIcon = () => (
+  <img
+    src="/download.svg"
+    alt="Download"
+    width={24}
+    height={24}
+    style={{ display: 'block' }}
+  />
+)
 
 const config: DocsThemeConfig = {
   logo: <Logo />,
