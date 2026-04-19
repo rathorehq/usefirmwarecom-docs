@@ -1,0 +1,120 @@
+/* Omen docs — mirrors usefirmware.com's Hollow Knight palette + type stack. */
+
+@import url('https://fonts.googleapis.com/css2?family=DotGothic16&family=Manrope:wght@400;500;600;700&display=swap');
+
+/* Glacial Indifference — shipped locally (same .otf files as usefirmware-website). */
+@font-face {
+  font-family: 'Glacial Indifference';
+  src: url('/glacial-indifference/GlacialIndifference-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Glacial Indifference';
+  src: url('/glacial-indifference/GlacialIndifference-Bold.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Glacial Indifference';
+  src: url('/glacial-indifference/GlacialIndifference-Italic.otf') format('opentype');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  /* Hollow Knight palette — same tokens used in usefirmware-website/app/globals.css */
+  --hk-abyss: #0f0f1b;
+  --hk-abyss-1: #161626;
+  --hk-abyss-2: #1d1e31;
+  --hk-abyss-3: #262840;
+  --hk-ghost: #565a75;
+  --hk-ghost-1: #8a8ea3;
+  --hk-lumen: #fafbf6;
+  --hk-soul: #7cb4e6;
+  --hk-navy: #172751;
+
+  /* Nextra primary — override so accents (links, buttons, hover) land on Soul. */
+  --nextra-primary-hue: 210deg;
+  --nextra-primary-saturation: 70%;
+  --nextra-primary-lightness: 70%;
+
+  /* Universal radius — site uses rounded-xs (2px) everywhere. */
+  --omen-radius: 2px;
+}
+
+html,
+body {
+  font-family: 'Glacial Indifference', 'Manrope', ui-sans-serif, system-ui, sans-serif;
+}
+
+html.dark {
+  background: var(--hk-abyss);
+  color: var(--hk-lumen);
+}
+
+html.light,
+html:not(.dark) {
+  background: var(--hk-lumen);
+  color: var(--hk-abyss);
+}
+
+/* Nextra internal surface tokens — pull them toward the Abyss ladder so the
+   site feels like it belongs to usefirmware.com. */
+html.dark {
+  --nextra-bg: 15 15 27; /* hk-abyss */
+}
+
+/* Kill rounded-full / pill radii — align with rounded-xs on the website. */
+a[class*='rounded-full'],
+button[class*='rounded-full'],
+[class*='rounded-lg'],
+[class*='rounded-xl'],
+[class*='rounded-md'] {
+  border-radius: var(--omen-radius) !important;
+}
+
+/* Headings — Manrope, matching usefirmware-website's .manrope-font class. */
+h1, h2, h3, h4, h5, h6,
+.nextra-content h1,
+.nextra-content h2,
+.nextra-content h3 {
+  font-family: 'Manrope', sans-serif;
+}
+
+/* Code — keep ui-monospace for inline, DotGothic16 for the brand mark only. */
+code, pre, kbd {
+  font-family: ui-monospace, SFMono-Regular, 'Cascadia Mono', Menlo, monospace;
+}
+
+/* Navbar hover states — lean toward Soul rather than default teal. */
+.nextra-nav-container a:hover {
+  color: var(--hk-soul);
+}
+
+/* Kill the navbar bottom border — the site has no divider under the header. */
+.nextra-nav-container,
+.nextra-nav-container nav,
+.nextra-nav-container-blur {
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Hide the "Last updated" footer line — gitTimestamp=null covers the
+   component path, this takes care of any residual markup. */
+.nextra-content :is(a, span, p)[class*='last-updated'],
+.nextra-content [data-timestamp],
+.nx-text-xs.nx-text-gray-500:has(time) {
+  display: none !important;
+}
+
+/* Card / callout tweaks — solid Abyss-1 background in dark mode. */
+html.dark .nextra-card,
+html.dark .nx-rounded-lg {
+  background: var(--hk-abyss-1);
+  border-color: var(--hk-ghost);
+  border-radius: var(--omen-radius);
+}
