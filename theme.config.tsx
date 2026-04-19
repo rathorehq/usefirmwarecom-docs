@@ -57,11 +57,6 @@ const config: DocsThemeConfig = {
       <title>Docs - AI firmware test engineer</title>
     </>
   ),
-  useNextSeoProps() {
-    return { titleTemplate: '%s - Omen' }
-  },
-  primaryHue: 210,
-  primarySaturation: 70,
   navbar: {
     extraContent: (
       <a
@@ -90,7 +85,7 @@ const config: DocsThemeConfig = {
     backToTop: false,
   },
   footer: {
-    text: (
+    content: (
       <span style={{ fontFamily: "'Glacial Indifference', 'Manrope', sans-serif" }}>
         © {new Date().getFullYear()} Omen · d@usefirmware.com
       </span>
@@ -102,9 +97,10 @@ const config: DocsThemeConfig = {
   },
   feedback: {
     content: null,
+    labels: '',
   },
   editLink: {
-    component: null,
+    component: () => null,
   },
 }
 
