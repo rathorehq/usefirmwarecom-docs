@@ -1,6 +1,8 @@
 export default {
   index: {
-    title: 'Coming soon',
+    title: 'Introduction',
     display: 'hidden',
   },
+  install: 'Install',
+  commands: 'CLI commands',
 }

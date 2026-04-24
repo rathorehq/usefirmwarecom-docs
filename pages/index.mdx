@@ -1,9 +1,31 @@
 ---
-title: Coming soon
+title: Omen docs
+description: Omen — an AI firmware test engineer in your terminal.
 ---
 
-# Coming soon
+# Omen
 
-The Omen docs are on the way.
+Omen is an AI firmware test engineer that runs in your terminal,
+reads your schematics and netlists, and drives your hardware through
+a conversational interface.
 
-In the meantime, [open the app](https://usefirmware.com/app) or reach out at [d@usefirmware.com](mailto:d@usefirmware.com).
+## Get started
+
+- **[Install](/install)** — one-line installer for macOS, Linux, and Windows.
+- **[CLI commands](/commands)** — the full command reference, including slash commands inside the TUI.
+
+## Quick start
+
+```bash
+curl -fsSL https://install.usefirmware.com/omen/install.sh | sh
+omen login
+omen
+```
+
+Then, inside the TUI:
+
+```
+/link <your-project-slug>
+```
+
+…and you're off.

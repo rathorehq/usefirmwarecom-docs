@@ -1,0 +1,215 @@
+---
+title: CLI commands
+description: Every command and slash-command the Omen CLI supports.
+---
+
+# CLI commands
+
+The Omen CLI has a small set of shell commands (run from your terminal)
+and a larger set of slash commands (typed inside the interactive TUI).
+
+## Shell commands
+
+Run these from any terminal after [installing](/install).
+
+### `omen`
+
+Launches the interactive assistant in the current directory. Requires
+you to be logged in, and requires an interactive TTY.
+
+```bash
+omen
+```
+
+If the current directory is linked to a project (see [`/link`](#link-slug)
+below), the TUI scopes its tools and docs to that project. If not,
+you'll be prompted to link one on first use — or run `/link <slug>`
+inside the TUI.
+
+### `omen login`
+
+Authorize the CLI on this device. Opens your default browser to
+[usefirmware.com](https://usefirmware.com), you sign in there, and
+the web app hands a token back to the CLI via a loopback URL.
+
+```bash
+omen login
+```
+
+The token is stored locally (chmod `0600` on POSIX) and re-used on
+every subsequent run. Valid until revoked or until you run `omen logout`.
+
+### `omen login --paste`
+
+The copy-paste fallback for headless environments (SSH, CI, a VM
+without a browser).
+
+```bash
+omen login --paste
+```
+
+The CLI prints a URL. Open it in any browser on any device, sign in,
+and copy the token shown on the page. Paste it into the CLI prompt.
+
+### `omen logout`
+
+Wipes the stored token and clears all CLI-managed local state:
+
+- `auth.json` (the token + email)
+- The sandboxed opencode runtime directory
+
+It does **not** touch your project folders, `.omen` links, or anything
+else on disk.
+
+```bash
+omen logout
+```
+
+### `omen whoami`
+
+Prints the email address of the currently signed-in account.
+
+```bash
+omen whoami
+# → you@example.com
+```
+
+Exits non-zero if you're not logged in.
+
+### `omen update`
+
+Re-runs the installer to pull the newest release from the CDN. Works
+the same on every platform regardless of which package manager first
+installed the CLI.
+
+```bash
+omen update
+```
+
+Pin to a specific version with `OMEN_VERSION`:
+
+```bash
+OMEN_VERSION=0.2.0 omen update
+```
+
+### `omen --version`
+
+Prints the installed CLI version.
+
+```bash
+omen --version
+# → 0.2.0
+```
+
+---
+
+## Slash commands (inside the TUI)
+
+Type these at the prompt once the TUI is running. They're synchronous
+and run locally — they don't consume your LLM budget.
+
+### `/`
+
+List every available slash command. Handy reminder.
+
+### `/help`
+
+Same as `/` — prints the slash-command reference.
+
+### `/link <slug>`
+
+Link the current folder to a project on usefirmware.com. The `<slug>`
+is the project's short identifier (you'll see it in the web app's URL).
+
+```
+/link comm-module-test
+```
+
+Once linked, the CLI:
+
+1. Creates `.omen` in this folder — a symlink (or Windows junction) to
+   `~/.omen/projects/<slug>/` where your project's docs live.
+2. Syncs datasheets, schematics, and netlist snapshots from the server.
+3. Drops a project-scoped plugin into `.opencode/plugins/` so the
+   assistant can query the netlist.
+
+Re-running `/link <other-slug>` switches the link to a different project.
+
+### `/unlink`
+
+Remove this folder's link — deletes the `.omen` symlink and forgets
+the project association for this directory. The actual project on
+usefirmware.com is untouched.
+
+### `/project`
+
+Show the current link — which project this folder points to, or
+"not linked" if not.
+
+### `/refresh`
+
+Re-sync project docs from the server. Run this after someone else
+updates datasheets, schematics, or netlist on usefirmware.com and you
+want the assistant to see the changes in-session.
+
+### `/sessions`
+
+List recent conversations for the currently-linked project, showing
+timestamps and first-message previews. Useful for finding prior
+context before starting a new turn.
+
+### `/revert`
+
+Undo the last turn — removes your most recent prompt and the
+assistant's response from the active session. Use this when a turn
+went off the rails and you want a clean slate without starting over.
+
+### `/unrevert`
+
+Restore messages that `/revert` removed. Only works if you haven't
+sent a new prompt in between.
+
+### `/fork`
+
+Fork a new session branching off from the current state. The original
+session is preserved; anything you do from here on lands in the new
+session. Good for exploring a speculative path without losing the
+main thread.
+
+### `/compact`
+
+Summarize the session so far and replace the scrollback with the
+summary. Reclaims context-window space on long sessions without
+losing the thread of what's been decided.
+
+### `/todos`
+
+Show the current todo list the assistant is tracking. The assistant
+manages this automatically as it works through multi-step tasks —
+this command just exposes the underlying state.
+
+### `/logout`
+
+Sign out and exit the TUI in one step. Equivalent to quitting the
+TUI and running `omen logout` from the shell.
+
+---
+
+## Environment variables
+
+All optional. Set these in your shell if you want to override defaults.
+
+| Var | Default | Purpose |
+|---|---|---|
+| `OMEN_VERSION` | `latest` | Pin a specific installer version |
+| `OMEN_CDN_BASE` | `https://install.usefirmware.com` | Override the CDN (staging / self-hosted) |
+| `OMEN_DEBUG` | unset | Set to `1` to inline opencode's logs for debugging |
+
+## Exit codes
+
+| Code | Meaning |
+|---|---|
+| 0 | Normal exit |
+| 1 | Generic failure |
+| 2 | Unknown command or flag |
+| 3 | CLI version below the server-required minimum (run `omen update`) |
