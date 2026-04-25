@@ -94,11 +94,7 @@ const config: DocsThemeConfig = {
     backToTop: false,
   },
   footer: {
-    content: (
-      <span style={{ fontFamily: "'Glacial Indifference', 'Manrope', sans-serif" }}>
-        © {new Date().getFullYear()} Omen · d@usefirmware.com
-      </span>
-    ),
+    component: () => null,
   },
   darkMode: true,
   nextThemes: {

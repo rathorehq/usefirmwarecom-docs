@@ -118,3 +118,20 @@ html.dark .nx-rounded-lg {
   border-color: var(--hk-ghost);
   border-radius: var(--omen-radius);
 }
+
+/* Hide main footer at bottom of page only (not sidebar footer with theme toggle). */
+.nextra-footer,
+footer[class*='nextra-footer'] {
+  display: none !important;
+}
+
+/* Remove border/line above theme toggle in sidebar footer. */
+.nextra-sidebar-footer,
+[class*='nextra-sidebar-footer'] {
+  border-top: none !important;
+  box-shadow: none !important;
+}
+.nextra-sidebar-footer::before,
+[class*='nextra-sidebar-footer']::before {
+  display: none !important;
+}
