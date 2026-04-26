@@ -20,13 +20,13 @@ release from our CDN and installs it globally via `npm`.
 ## macOS and Linux
 
 ```bash
-curl -fsSL https://install.usefirmware.com/omen/install.sh | sh
+curl -fsSL https://usefirmwarecom-cli.sfo3.digitaloceanspaces.com/omen/install.sh | OMEN_CDN_BASE=https://usefirmwarecom-cli.sfo3.digitaloceanspaces.com sh
 ```
 
 ## Windows (PowerShell)
 
 ```powershell
-iwr -useb https://install.usefirmware.com/omen/install.ps1 | iex
+$env:OMEN_CDN_BASE = "https://usefirmwarecom-cli.sfo3.digitaloceanspaces.com"; iwr -useb https://usefirmwarecom-cli.sfo3.digitaloceanspaces.com/omen/install.ps1 | iex
 ```
 
 ## First run
@@ -44,12 +44,12 @@ Useful for CI or when you want to reproduce an exact build.
 
 ```bash
 # macOS / Linux
-curl -fsSL https://install.usefirmware.com/omen/install.sh | OMEN_VERSION=1.3.0 sh
+curl -fsSL https://usefirmwarecom-cli.sfo3.digitaloceanspaces.com/omen/install.sh | OMEN_CDN_BASE=https://usefirmwarecom-cli.sfo3.digitaloceanspaces.com OMEN_VERSION=1.3.0 sh
 ```
 
 ```powershell
 # Windows
-$env:OMEN_VERSION = "1.3.0"; iwr -useb https://install.usefirmware.com/omen/install.ps1 | iex
+$env:OMEN_CDN_BASE = "https://usefirmwarecom-cli.sfo3.digitaloceanspaces.com"; $env:OMEN_VERSION = "1.3.0"; iwr -useb https://usefirmwarecom-cli.sfo3.digitaloceanspaces.com/omen/install.ps1 | iex
 ```
 
 Old versions stay available on the CDN, so pinning doesn't expire.
