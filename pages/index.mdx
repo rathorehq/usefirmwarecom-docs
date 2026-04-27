@@ -16,6 +16,30 @@ a conversational interface.
 
 ## Quick start
 
+### Prerequisites
+
+Omen ships through `npm`, so you'll need **Node.js 22 or newer** and **npm**
+(npm is bundled with Node) installed first.
+
+- **macOS** — `brew install node`, or grab the installer from [nodejs.org](https://nodejs.org).
+- **Linux** — install via your distro's package manager, or use a version
+  manager like [nvm](https://github.com/nvm-sh/nvm) (`nvm install 22`) or
+  [fnm](https://github.com/Schniz/fnm) (`fnm install 22`).
+- **Windows** — download the installer from [nodejs.org](https://nodejs.org),
+  or use [winget](https://learn.microsoft.com/en-us/windows/package-manager/winget/)
+  (`winget install OpenJS.NodeJS`).
+
+Verify both are on your `PATH` before continuing:
+
+```bash
+node --version   # should print v22.x.x or newer
+npm --version
+```
+
+If either command isn't found, fix that first — the installer below relies on `npm`.
+
+### Install and run
+
 ```bash
 curl -fsSL https://usefirmwarecom-cli.sfo3.digitaloceanspaces.com/omen/install.sh | OMEN_CDN_BASE=https://usefirmwarecom-cli.sfo3.digitaloceanspaces.com sh
 omen login
