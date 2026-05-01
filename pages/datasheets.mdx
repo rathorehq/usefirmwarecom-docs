@@ -1,0 +1,39 @@
+---
+title: Datasheets
+description: Add component datasheets to your Omen project so the assistant can reason over them.
+---
+
+# Datasheets
+
+Add a component datasheet PDF and Omen extracts its contents (pinouts, electrical specs, absolute ratings, etc.) so the assistant can reference it during conversations.
+
+## Add a datasheet
+
+Open the widget:
+
+```
+/datasheet
+```
+
+Then press **`a`** to add. You'll see a single input that works two ways:
+
+- **Upload a new PDF** — type or paste a file path (e.g. `~/Downloads/stm32f407.pdf`) and press Enter. You'll then be prompted for a part label like `STM32F407VGT6` (leave blank for auto-detect).
+- **Attach an existing datasheet** — type a search term (e.g. `STM32F407`) and the list below filters to show matching datasheets already on your account. Press **`↓`** to move focus into the list, **`↑`** to go back to the input, and **Enter** on a listed datasheet to attach it to this folder/project instantly.
+
+You can also upload directly from the prompt:
+
+```
+/datasheet ~/Downloads/stm32f407.pdf STM32F407VGT6
+```
+
+## Processing
+
+After upload, the datasheet enters **processing** state while Omen OCRs and extracts sections from the PDF. This typically takes **2–5 minutes**. The widget updates the status live — no need to re-open it.
+
+Need faster uploads? Reach out at **d@usefirmware.com**.
+
+## Remove a datasheet
+
+Open the widget with `/datasheet`, navigate to the datasheet with **`↑`/`↓`**, and press **`r`** to remove it from the project. Press **`esc`** to close the widget.
+
+Removing a datasheet unlinks it from this folder/project — it stays on your account and can be re-attached later.
