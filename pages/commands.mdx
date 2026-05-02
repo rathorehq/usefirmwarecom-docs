@@ -26,6 +26,24 @@ below), the TUI scopes its tools and docs to that project. If not,
 you'll be prompted to link one on first use — or run `/link <slug>`
 inside the TUI.
 
+### `omen <datasheet> [label]`
+
+Upload a PDF datasheet directly from the command line. The file is
+sent to the server and processing starts in the background — the CLI
+returns immediately.
+
+```bash
+# auto-detect the part number
+omen ~/Downloads/stm32f407.pdf
+
+# specify the part number explicitly
+omen ~/Downloads/stm32f407.pdf STM32F407VGT6
+```
+
+Extracted content is synced to `.omen/datasheets/` the next time you
+open the assistant in a linked folder. See [Datasheets](/datasheets) for
+the full guide.
+
 ### `omen login`
 
 Authorize the CLI on this device. Opens your default browser to

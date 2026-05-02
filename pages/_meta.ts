@@ -5,4 +5,5 @@ export default {
   },
   install: 'Install',
   commands: 'CLI commands',
+  datasheets: 'Datasheets',
 }
